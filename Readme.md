@@ -1,5 +1,12 @@
 # linkedin-clone
 
+How to run the project?
+- Download zip
+- open terminal
+- cd linkedin-clone
+- npm install
+- npm run dev
+
 ## Project Structure explanation
 
 ###### Assets Folder
