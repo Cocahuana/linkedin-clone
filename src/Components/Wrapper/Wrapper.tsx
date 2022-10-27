@@ -1,4 +1,4 @@
-function Wrapper(props) {
+function Wrapper(props: any): JSX.Element {
 	const {children} = props;
 	return (
 		<div

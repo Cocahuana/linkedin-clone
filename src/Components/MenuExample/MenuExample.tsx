@@ -1,13 +1,13 @@
 import React from "react";
 import MenuItemExample from "./MenuItemExample/MenuItemExample";
-function MenuExample() {
+function MenuExample(): JSX.Element {
 	return (
-        <ul>
+		<ul>
 			<MenuItemExample />
 			<MenuItemExample />
 			<MenuItemExample />
 			<MenuItemExample />
-        </ul>
+		</ul>
 	);
 }
 

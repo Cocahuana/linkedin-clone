@@ -1,7 +1,7 @@
 import React from "react";
 import Wrapper from "../../Components/Wrapper/Wrapper";
 import MenuExample from "../../Components/MenuExample/MenuExample";
-function Home() {
+function Home(): JSX.Element {
 	return (
 		<Wrapper>
 			<MenuExample />
