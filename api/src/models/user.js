@@ -20,8 +20,8 @@ module.exports = (sequelize) => {
             },
         },  
         password: {
-            type: DataTypes.STRING,
-            allowNull: true,
+            type: DataTypes.ARRAY(DataTypes.STRING),
+            allowNull: false,
             validate: {
                 notEmpty: true,
             },
