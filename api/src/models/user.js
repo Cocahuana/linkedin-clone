@@ -42,6 +42,10 @@ module.exports = (sequelize) => {
             type: DataTypes.STRING,
             allowNull: true
         },
+        from: {
+            type: DataTypes.ARRAY(DataTypes.STRING),
+            allowNull: false
+        },
         isVerified: {
             type: DataTypes.BOOLEAN,
             allowNull: false,
@@ -58,7 +62,7 @@ module.exports = (sequelize) => {
         blacklist: {
             type: DataTypes.BOOLEAN,
             defaultValue: false
-        }  
+        }
     }, {timestamps: false})
 };
 
