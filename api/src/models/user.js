@@ -20,11 +20,58 @@ module.exports = (sequelize) => {
             },
         },  
         password: {
-            type: DataTypes.STRING,
-            allowNull: true,
+            type: DataTypes.ARRAY(DataTypes.STRING),
+            allowNull: false,
             validate: {
                 notEmpty: true,
             },
-        },      
+        }, 
+        names: {
+            type: DataTypes.STRING,
+            allowNull: true,
+        },
+        surnames: {
+            type: DataTypes.STRING,
+            allowNull: true
+        },
+        alias: {
+            type: DataTypes.STRING,
+            allowNull: true
+        },
+        country: {
+            type: DataTypes.STRING,
+            allowNull: true
+        },
+        from: {
+            type: DataTypes.ARRAY(DataTypes.STRING),
+            allowNull: false
+        },
+        isVerified: {
+            type: DataTypes.BOOLEAN,
+            allowNull: false,
+            defaultValue: false
+        },
+        isAdmin: {
+            type: DataTypes.BOOLEAN,
+            defaultValue: false
+        },
+        datacompleted: {
+            type: DataTypes.BOOLEAN,
+            defaultValue: false
+        },
+        blacklist: {
+            type: DataTypes.BOOLEAN,
+            defaultValue: false
+        }
     }, {timestamps: false})
 };
+
+
+//names
+//surnames
+//alias
+//country
+//isAdmin
+//blacklist
+//datacompleted
+//isVerified
