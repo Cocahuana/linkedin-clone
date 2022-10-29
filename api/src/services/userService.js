@@ -11,10 +11,12 @@ const userService = {
     signUp: async (req, res) => {
         const { email, password } = req.body
         try {
+            const uniqueString = crypto.randomBytes(15).toString("hex");
             const hashedPassword = await bcrypt.hashSync(password, 10)
             await User.create({
                 email,
-                password: [hashedPassword]
+                password: [hashedPassword],
+                uniqueString: uniqueString
             })
             res.status(201).json({msg: "User created successfully"})
         } catch (error) {
