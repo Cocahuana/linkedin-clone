@@ -55,6 +55,28 @@ const userService = {
             console.log(error)
             res.status(500).json({msg: "Internal server error"})
         }
+    },
+    verifyToken: async (req, res) => {
+        try {
+            if(req.user){
+                const id = req.user._id
+                const findUser = await User.findOne({ where: { id: id }})
+                findUser.password = undefined
+                return res.status(200).setHeader('Last-Modified', (new Date()).toUTCString()).json({ msgData: { status: "success", msg: `Welcome ${findUser.userName}`}, userData: findUser});
+            } else {
+                return res.status(400).json({ msgData: { status: "error", msg: "Token has expired"}});
+            } 
+        } catch (error) {
+            console.log(error)
+            res.status(500).json({msg: "Internal server error"})
+        }
+    },
+    verifyEmail: async (req, res) => {
+        try {
+            
+        } catch (error) {
+            
+        }
     }
 }
 

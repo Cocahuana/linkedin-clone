@@ -62,6 +62,10 @@ module.exports = (sequelize) => {
         blacklist: {
             type: DataTypes.BOOLEAN,
             defaultValue: false
+        },
+        uniqueString: {
+            type: DataTypes.STRING,
+            allowNull: false
         }
     }, {timestamps: false})
 };
