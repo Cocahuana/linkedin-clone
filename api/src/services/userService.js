@@ -11,10 +11,13 @@ const userService = {
     signUp: async (req, res) => {
         const { email, password } = req.body
         try {
+            const uniqueString = crypto.randomBytes(15).toString("hex");
             const hashedPassword = await bcrypt.hashSync(password, 10)
             await User.create({
                 email,
-                password: [hashedPassword]
+                password: [hashedPassword],
+                uniqueString: uniqueString,
+                from: ["signUp"]
             })
             res.status(201).json({msg: "User created successfully"})
         } catch (error) {
@@ -54,6 +57,35 @@ const userService = {
         } catch (error) {
             console.log(error)
             res.status(500).json({msg: "Internal server error"})
+        }
+    },
+    verifyToken: async (req, res) => {
+        try {
+            if(req.user){
+                const email = req.user.email
+                const findUser = await User.findOne({ where: { email: email}})
+                findUser.password = undefined
+                return res.status(200).setHeader('Last-Modified', (new Date()).toUTCString()).json({ msgData: { status: "success", msg: `Welcome ${findUser.userName}`}, userData: findUser});
+            } else {
+                return res.status(400).json({ msgData: { status: "error", msg: "Token has expired"}});
+            } 
+        } catch (error) {
+            console.log(error)
+            res.status(500).json({msg: "Internal server error"})
+        }
+    },
+    verifyEmail: async (req, res) => {
+        const { id } = req.params;
+        try {
+            const findUser = await User.findOne({ uniqueString: id })
+            if(findUser){
+                await findUser.update({isVerified: true});
+                res.status(201).json({ msgData: { status: "success", msg: "Email verification completed. Thanks for register and be free to use our website!"} })
+            } else {
+                res.status(400).json({ msgData: { status: "error", msg: "Invalid verification code." }})
+            }
+        } catch (error) {
+            res.status(500).json({ msgData: { status:"error", msg: "Internal Server Error"}});
         }
     }
 }
